@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block cuerpo %}
+<br>
+<div class="row">
+    <div class="col-lg-1">
+    </div>
+    <div class="col-lg-10">
+        <table id="id_notas" class="display" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th class="text-center">TITULO</th>
+                <th class="text-center">USUARIO</th>
+                <th class="text-center">ESTADO</th>
+                <th class="text-center">ACCIONES</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for nota in notas %}
+                <tr>
+                    <td>{{ nota.titulo }}</td>
+                    <td>{{ nota.usuario }}</td>
+                    {% if nota.publico %}
+                    <td>PUBLICO</td>
+                    {% else %}
+                    <td>PRIVADO</td>
+                    {% endif %}
+                    <td class="text-center">
+                        <a href="{% url 'todo:detalle_nota' nota.pk %}">
+                            <i class="fa fa-book"></i>
+                        </a>
+                        {% if nota.usuario == user %}
+                        <a href="{% url 'todo:modificar_nota' nota.pk %}">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a href="{% url 'todo:eliminar_nota' nota.pk %}">
+                            <i class="fa fa-close"></i>
+                        </a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock cuerpo %}
+{% block js %}
+<script>
+$(document).ready(function()
+{
+    var table = $('#id_notas').DataTable({
+        "language": {
+        	url: "/static/localizacion/es_ES.json"
+        }
+    } );
+});
+</script>
+{% endblock js %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block cuerpo %}
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <br><br><br>
+        <div class="login-panel panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Título: {{ object.titulo }}</h3>
+            </div>
+            <div class="panel-body">
+                <label>Contenido</label>
+                <div>{{ object.contenido }}</div>
+                <br>
+                <label>Usuario</label>
+                <div>{{ object.usuario }}</div>
+                <br>
+                <label>Estado</label>
+                {% if object.publico %}
+                <div>Público</div>
+                {% else %}
+                <div>Privado</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock cuerpo %}
